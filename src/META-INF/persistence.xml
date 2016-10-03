@@ -14,8 +14,8 @@
 <class>br.com.wisold.clientes.Cliente</class>
 <class>br.com.wisold.enderecos.Endereco</class>
 <class>br.com.wisold.industrias.Industria</class>
-<!-- <class>br.com.wisold.pedidos.Pedido</class>
-<class>br.com.wisold.pedidos.ItemPedido</class> -->
+<class>br.com.wisold.pedidos.Pedido</class>
+<class>br.com.wisold.pedidos.ItemPedido</class>
 <class>br.com.wisold.produtos.Produto</class>
 
  <properties>
