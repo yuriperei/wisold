@@ -4,6 +4,8 @@ import br.com.wisold.enderecos.Endereco;
 import br.com.wisold.produtos.Produto;
 import br.com.wisold.usuarios.Usuario;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,9 +28,9 @@ public class Industria {
 	private Double comissao;
 	@ManyToOne
 	private Usuario usuario;
-	@OneToMany(mappedBy = "industria", fetch = FetchType.EAGER, cascade = { javax.persistence.CascadeType.REMOVE })
+	@OneToMany(mappedBy = "industria", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Endereco> enderecos;
-	@OneToMany(mappedBy = "industria", cascade = { javax.persistence.CascadeType.REMOVE })
+	@OneToMany(mappedBy = "industria", cascade = CascadeType.REMOVE)
 	private List<Produto> produtos;
 
 	public Long getId() {

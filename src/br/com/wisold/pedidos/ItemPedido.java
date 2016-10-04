@@ -1,12 +1,14 @@
 package br.com.wisold.pedidos;
 
-import br.com.wisold.produtos.Produto;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import br.com.wisold.produtos.Produto;
 
 @Entity
 @Table(name = "itempedidos")
@@ -18,10 +20,28 @@ public class ItemPedido {
 	private Double valor;
 	private Double total;
 	private String embalagem;
+	
 	@OneToOne
 	private Produto produto;
+	
 	@ManyToOne
 	private Pedido pedido;
+	
+	
+
+	public ItemPedido(Long id, Integer quantidade, Double valor, Double total, String embalagem, Produto produto,
+			Pedido pedido) {
+		super();
+		/*this.id = id;*/
+		this.quantidade = quantidade;
+		this.valor = valor;
+		this.total = total;
+		this.embalagem = embalagem;
+		this.produto = produto;
+		this.pedido = pedido;
+	}
+	
+	public ItemPedido(){}
 
 	public Long getId() {
 		return this.id;
@@ -78,7 +98,8 @@ public class ItemPedido {
 	public void setEmbalagem(String embalagem) {
 		this.embalagem = embalagem;
 	}
-
+	
+	
 	public int hashCode() {
 		int prime = 31;
 		int result = 1;

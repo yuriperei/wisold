@@ -37,7 +37,7 @@
 			<div class="col-xs-12">
 
 				<div class="box box-primary">
-					
+
 					<!-- /.box-header -->
 					<div class="box-body">
 						<table id="tabela" class="table table-bordered table-striped">
@@ -122,7 +122,8 @@
 																		<input type="number" required class="form-control"
 																			id="valor${produto.id}" name="valor_"
 																			value="${produto.preco}"
-																			onblur="calcularTotal(${produto.id})" step='any' min='0'>
+																			onblur="calcularTotal(${produto.id})" step='any'
+																			min='0'>
 																	</div>
 																</div>
 
@@ -158,10 +159,10 @@
 									<script type="text/javascript">
 										function calcularTotal(id) {
 											document.getElementById("total"+id).value = document.getElementById("quantidade"+id).value * document.getElementById("valor"+id).value;
-										}	
+										}
+										
+										
 									</script>
-
-
 
 								</c:forEach>
 							</tbody>
@@ -181,7 +182,8 @@
 					<!-- /.box-body -->
 
 					<div class="box-footer">
-						<a class="btn btn-primary pull-right" href="gerarPedido">Gerar Pedido</a>
+						<a class="btn btn-primary pull-right" href="gerarPedido">Gerar
+							Pedido</a>
 					</div>
 					<!-- /.box-footer -->
 
@@ -235,8 +237,8 @@
 		<script type="text/javascript">
 
 			$('#myModal'+${produto.id}).on('shown.bs.modal', function () {
-			   $('#quantidade'+${produto.id}).focus();
-			   $('#total'+${produto.id}).val('0');
+			   $('#quantidade'+${produto.id}).focus().val('1').select();
+			   $('#total'+${produto.id}).val(${produto.preco});
 			   $('#valor'+${produto.id}).val(${produto.preco});
 			})
 			 

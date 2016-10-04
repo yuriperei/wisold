@@ -1,8 +1,8 @@
 package br.com.wisold.pedidos;
 
-import br.com.wisold.clientes.Cliente;
-import br.com.wisold.industrias.Industria;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import br.com.wisold.clientes.Cliente;
+import br.com.wisold.industrias.Industria;
 
 @Entity
 @Table(name = "pedidos")
@@ -19,7 +22,7 @@ public class Pedido {
 	private Long id;
 	private Long codigo;
 	private Double total;
-	@OneToMany(mappedBy = "pedido", cascade = { javax.persistence.CascadeType.REMOVE })
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> itens;
 	@OneToOne
 	private Industria industria;

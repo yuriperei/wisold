@@ -53,10 +53,9 @@ public class PedidoController {
 			this.session.setAttribute("produtos", listarProdutos(industria));
 
 			this.session.setAttribute("industria", industria);
-			this.itensPedido = new ArrayList();
 		}
 
-		return "pedido/manter";
+		return "pedido/manter_produto";
 	}
 
 	@RequestMapping({ "/adicionarProduto" })
@@ -69,16 +68,26 @@ public class PedidoController {
 		itemPedido.setEmbalagem(embalagem_);
 		itemPedido.setProduto(produto);
 
-		this.itensPedido.add(itemPedido);
-
-		for (ItemPedido ip : this.itensPedido) {
-			System.out.println(">>>>>> " + ip.getProduto().getNome());
-			System.out.println(">>>>>> " + ip.getQuantidade());
-			System.out.println(">>>>>> " + ip.getValor());
-			System.out.println(">>>>>> " + ip.getTotal());
+		if (this.session.getAttribute("itensPedido") == null) {
+			this.itensPedido = new ArrayList();
+		} else {
+			this.itensPedido = (List<ItemPedido>) this.session.getAttribute("itensPedido");
 		}
-		System.out.println("-----------------------------------------------");
-		return "pedido/manter";
+
+		this.itensPedido.add(itemPedido);
+		this.session.setAttribute("itensPedido", itensPedido);
+
+		return "pedido/manter_produto";
+	}
+
+	@RequestMapping({ "/gerarPedido" })
+	public ModelAndView gerarPedido() {
+
+		List<Cliente> clientes = clienteDlo.listar(getUsuario());
+		session.setAttribute("clientes", clientes);
+
+		retorno.setViewName("pedido/detalhes");
+		return this.retorno;
 	}
 
 	@RequestMapping({ "/alterarPedido" })
@@ -92,7 +101,13 @@ public class PedidoController {
 	}
 
 	@RequestMapping({ "/manterPedido" })
-	public ModelAndView manter(Pedido pedido, Long idIndustria) {
+	public ModelAndView manter(Pedido pedido) {
+
+		pedido.setIndustria((Industria) session.getAttribute("industria"));
+		pedido.setItens(this.manterItensPedido(pedido));
+
+		dlo.manterPedido(pedido);
+		this.retorno.setViewName("pedido/index");
 		return this.retorno;
 	}
 
@@ -121,5 +136,17 @@ public class PedidoController {
 
 	private Usuario getUsuario() throws NullPointerException {
 		return (Usuario) this.session.getAttribute("user");
+	}
+
+	// Responsável por settar qual é o pedido do item
+	private List<ItemPedido> manterItensPedido(Pedido pedido) {
+
+		List<ItemPedido> itens = (List<ItemPedido>) session.getAttribute("itensPedido");
+
+		for (ItemPedido itemPedido : itens) {
+			itemPedido.setPedido(pedido);
+		}
+
+		return itens;
 	}
 }

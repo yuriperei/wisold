@@ -1,9 +1,8 @@
 package br.com.wisold.clientes;
 
-import br.com.wisold.enderecos.Endereco;
-import br.com.wisold.pedidos.Pedido;
-import br.com.wisold.usuarios.Usuario;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import br.com.wisold.enderecos.Endereco;
+import br.com.wisold.pedidos.Pedido;
+import br.com.wisold.usuarios.Usuario;
 
 @Entity
 @Table(name = "clientes")
@@ -24,9 +27,9 @@ public class Cliente {
 	private String cnpj;
 	@ManyToOne
 	private Usuario usuario;
-	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER, cascade = { javax.persistence.CascadeType.REMOVE })
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Endereco> enderecos;
-	@OneToMany(mappedBy = "cliente", cascade = { javax.persistence.CascadeType.REMOVE })
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
 	private List<Pedido> pedidos;
 
 	public Long getId() {
