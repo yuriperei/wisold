@@ -110,7 +110,7 @@
 																	<div class="col-sm-3">
 																		<input type="number" required class="form-control"
 																			id="quantidade${produto.id}" name="quantidade_"
-																			onblur="calcularTotal(${produto.id})" min='1'>
+																			onkeydown="calcularTotal(${produto.id})" onblur="calcularTotal(${produto.id})" min='1'>
 																	</div>
 																	<p class="help-block col-sm-7">Informe a quantidade
 																		do itens.</p>
@@ -122,7 +122,7 @@
 																		<input type="number" required class="form-control"
 																			id="valor${produto.id}" name="valor_"
 																			value="${produto.preco}"
-																			onblur="calcularTotal(${produto.id})" step='any'
+																			onkeydown="calcularTotal(${produto.id})" onblur="calcularTotal(${produto.id})" step='any'
 																			min='0'>
 																	</div>
 																</div>
@@ -160,10 +160,7 @@
 										function calcularTotal(id) {
 											document.getElementById("total"+id).value = document.getElementById("quantidade"+id).value * document.getElementById("valor"+id).value;
 										}
-										
-										
-									</script>
-
+										</script>
 								</c:forEach>
 							</tbody>
 							<tfoot>

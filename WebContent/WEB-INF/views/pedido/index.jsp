@@ -53,6 +53,7 @@
 							<thead>
 								<tr>
 									<th>Código</th>
+									<th>Cliente</th>
 									<th>Indústria</th>
 									<th>Total</th>
 									<th></th>
@@ -61,12 +62,13 @@
 							<tbody>
 								<c:forEach var="pedido" items="${pedidos}">
 									<tr>
-										<td>${produto.codigo}</td>
-										<td>${produto.industria.nomeFantasia}</td>
-										<td>${produto.total}</td>
+										<td>${pedido.codigo}</td>
+										<td>${pedido.cliente.nome}</td>
+										<td>${pedido.industria.nomeFantasia}</td>
+										<td>${pedido.total}</td>
 										<td><a class="btn .btn-xs"
 											href="visualizarPedido?id=${pedido.id}"> <i
-												class="fa fa-edit"></i> Editar
+												class="fa fa-edit"></i> Visualizar
 										</a> <a class="btn .btn-xs" href="excluirPedido?id=${pedido.id}">
 												<i class="fa  fa-trash"></i> Excluir
 										</a></td>
@@ -76,6 +78,7 @@
 							<tfoot>
 								<tr>
 									<th>Código</th>
+									<th>Cliente</th>
 									<th>Indústria</th>
 									<th>Total</th>
 									<th></th>

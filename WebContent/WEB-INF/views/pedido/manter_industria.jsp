@@ -29,19 +29,20 @@
 			<li class="active">Data tables</li>
 		</ol>
 		</section>
-		
+
 		<!-- Main content -->
 		<section class="content">
 		<div class="row">
 			<div class="col-xs-12">
-			
-			<c:if test="${not empty mensagem}">
-			<div class="alert alert-danger alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                     <p>${mensagem}</p>
-                  </div>
-		</c:if>
-		
+
+				<c:if test="${not empty mensagem}">
+					<div class="alert alert-danger alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-hidden="true">&times;</button>
+						<p>${mensagem}</p>
+					</div>
+				</c:if>
+
 				<div class="box box-primary">
 					<div class="box-header">
 						<h3 class="box-title">Data Table With Full Features</h3>
@@ -61,9 +62,10 @@
 								<c:forEach var="industria" items="${industrias}">
 									<tr>
 										<td>${industria.nomeFantasia}</td>
-										<td>${industria.razaoSocial}</td>										<td>${industria.comissao}</td>
+										<td>${industria.razaoSocial}</td>
+										<td>${industria.comissao}</td>
 										<td><a class="btn .btn-xs"
-											href="pedido?idIndustria=${industria.id}"> <i
+											href="adicionarIndustria?idIndustria=${industria.id}"> <i
 												class="fa fa-edit"></i> Selecionar
 										</a></td>
 									</tr>
@@ -81,7 +83,7 @@
 					</div>
 					<!-- /.box-body -->
 
-<!-- 					<div class="box-footer">
+					<!-- 					<div class="box-footer">
 							<a class="btn btn-primary pull-right" href="cadastrarIndustria">Cadastrar novo</a>
 					</div>
 					/.box-footer -->
@@ -91,7 +93,7 @@
 			</div>
 			<!-- /.col -->
 
-		
+
 
 		</div>
 		<!-- /.row --> </section>
@@ -111,7 +113,7 @@
 		type="text/javascript"></script>
 	<script src="resources/plugins/datatables/dataTables.bootstrap.min.js"
 		type="text/javascript"></script>
-		<script src="resources/plugins/datatables/dataTablesTraducao.js"
+	<script src="resources/plugins/datatables/dataTablesTraducao.js"
 		type="text/javascript"></script>
 	<!-- SlimScroll -->
 	<script src="resources/plugins/slimScroll/jquery.slimscroll.min.js"

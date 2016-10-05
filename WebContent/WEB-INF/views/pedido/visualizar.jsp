@@ -10,31 +10,9 @@
 <link href="resources/plugins/datatables/dataTables.bootstrap.css"
 	rel="stylesheet" type="text/css" />
 <%@ include file="../estrutura/head.jspf"%>
-
-<script>
-var total = 0;
-
-function writeTotal(valor) {
-total = total + valor		
-
-}
-
-function exibir(){
-	document.getElementById("td-total").innerHTML = total;
-	document.getElementById("total").value = total;
-}
-
-onload = function(){
-	exibir();
-};
-
-
-</script>
-
 </head>
 <body
 	class="skin-blue-light fixed sidebar-mini  sidebar-mini wysihtml5-supported skin-blue">
-
 
 	<%@ include file="../estrutura/cabecalho.jspf"%>
 
@@ -67,26 +45,47 @@ onload = function(){
 						<!-- form start -->
 
 						<div class="box-body">
-							<%-- <input name="id" type="hidden" value="${industria.id}"> --%>
+
+
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">Código</label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" id="codigo"
+										name="codigo" placeholder="Código do pedido" readonly="true"
+										value="${pedido.codigo}">
+								</div>
+								<label for="inputEmail3" class="col-sm-1 control-label">Total</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" id="total" readonly="true" name="total"
+										placeholder="Total" value="${pedido.total}">
+								</div>
+							</div>
 
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">Cliente</label>
 								<div class="col-sm-10">
-									<select class="form-control select2"
-										data-placeholder="Selecione o cliente" name="cliente.id"
-										id="cliente.id">
-										<c:forEach items="${clientes}" var="cliente">
-											<option value="${cliente.id}">${cliente.nome}</option>
-										</c:forEach>
-
-									</select>
+									<input type="text" class="form-control" id="clienteNome"
+										name="clienteNome" placeholder="Nome cliente" readonly="true"
+										value="${pedido.cliente.nome}">
 								</div>
 							</div>
-
+							
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">Indústria</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="industriaNome"
+										name="industriaNome" placeholder="Nome da indústria" readonly="true"
+										value="${pedido.industria.nomeFantasia}">
+								</div>
+							</div>
 
 						</div>
 						<!-- /.box-body -->
 
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary pull-right">Salvar</button>
+						</div>
+						<!-- /.box-footer -->
 
 
 					</div>
@@ -106,46 +105,40 @@ onload = function(){
 						</div>
 					</c:if>
 
-
+					<!-- Horizontal Form -->
 					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title">Produtos</h3>
 						</div>
 						<!-- /.box-header -->
+
+
 						<div class="box-body">
-							<table class="table table-condensed">
-								<tr>
-									<th>Código</th>
-									<th>Descrição</th>
-									<th>Quantidade</th>
-									<th>Preço</th>
-									<th>Total</th>
-								</tr>
-
-								<c:forEach items="${itensPedido}" var="item">
+							<table id="tabela" class="table table-bordered table-striped">
+								<thead>
 									<tr>
-										<td>${item.produto.codigoProduto}</td>
-										<td>${item.produto.nome}</td>
-										<td>${item.quantidade}</td>
-										<td>${item.valor}</td>
-										<td>${item.total}</td>
+										<th>Código</th>
+										<th>Descrição</th>
+										<th>Quantidade</th>
+										<th>Preço</th>
+										<th>Total</th>
 									</tr>
-
-									<script>writeTotal(${item.total})</script>
-								</c:forEach>
-
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<th>Total</th>
-									<td id="td-total">0</td>
-									<input name="total" id="total" type="hidden" >
-								</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${pedido.itens}" var="item">
+										<tr>
+											<td>${item.produto.codigoProduto}</td>
+											<td>${item.produto.nome}</td>
+											<td>${item.quantidade}</td>
+											<td>${item.valor}</td>
+											<td>${item.total}</td>
+										</tr>
+									</c:forEach>
+									
+								</tbody>
 							</table>
+							<!-- /.box-body -->
 						</div>
-						<!-- /.box-body -->
-
 
 						<div class="box-footer">
 							<button class="btn btn-primary pull-right">Finalizar
@@ -155,8 +148,6 @@ onload = function(){
 
 					</div>
 					<!-- /.box -->
-
-
 
 				</div>
 				<!-- /.col -->
@@ -210,7 +201,6 @@ onload = function(){
 	<script src="resources/dist/js/demo.js" type="text/javascript"></script>
 	<!-- page script -->
 	<script type="text/javascript">
-	
 		$(function() {
 			//Initialize Select2 Elements
 			$(".select2").select2();

@@ -40,12 +40,13 @@ public class PedidoController {
 
 	@RequestMapping({ "/cadastrarPedido" })
 	public String cadastrar() {
+		this.session.removeAttribute("itensPedido");
 		this.session.setAttribute("industrias", listarIndustrias());
 
 		return "pedido/manter_industria";
 	}
 
-	@RequestMapping({ "/pedido" })
+	@RequestMapping({ "/adicionarIndustria" })
 	public String cadastrar(Long idIndustria) {
 		Industria industria = this.industriaDlo.buscarPorId(idIndustria, getUsuario());
 
@@ -89,14 +90,38 @@ public class PedidoController {
 		retorno.setViewName("pedido/detalhes");
 		return this.retorno;
 	}
+	
+	@RequestMapping("/visualizarPedido")
+	public ModelAndView visualizar(Long id){
+		Pedido pedido = this.dlo.buscarPorId(id, getUsuario());
 
-	@RequestMapping({ "/alterarPedido" })
-	public ModelAndView alterar(Long id) {
+		if (pedido != null) {
+			this.session.setAttribute("pedido", pedido);
+			this.retorno.setViewName("pedido/visualizar");
+			this.retorno.getModelMap().remove("mensagem");
+		} else {
+			this.retorno.addObject("mensagem", "O pedido não existe!");
+			this.retorno.setViewName("pedido/index");
+		}
+
 		return this.retorno;
 	}
 
+	/*@RequestMapping({ "/alterarPedido" })
+	public ModelAndView alterar(Long id) {
+		return this.retorno;
+	}*/
+
 	@RequestMapping({ "/excluirPedido" })
 	public ModelAndView excluir(Long id) {
+		if (this.dlo.excluir(id, getUsuario())) {
+			this.retorno.setViewName("redirect:pedidos");
+			this.retorno.getModelMap().remove("mensagem");
+		} else {
+			this.retorno.addObject("mensagem", "Não foi possível deletar o pedido");
+			this.retorno.setViewName("pedido/index");
+		}
+
 		return this.retorno;
 	}
 
@@ -107,7 +132,7 @@ public class PedidoController {
 		pedido.setItens(this.manterItensPedido(pedido));
 
 		dlo.manterPedido(pedido);
-		this.retorno.setViewName("pedido/index");
+		this.retorno.setViewName("redirect:pedidos");
 		return this.retorno;
 	}
 
