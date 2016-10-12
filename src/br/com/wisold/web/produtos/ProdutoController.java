@@ -1,28 +1,33 @@
 package br.com.wisold.web.produtos;
 
-import br.com.wisold.industrias.Industria;
-import br.com.wisold.industrias.IndustriaDlo;
-import br.com.wisold.produtos.Produto;
-import br.com.wisold.produtos.ProdutoDlo;
-import br.com.wisold.usuarios.Usuario;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.wisold.industrias.Industria;
+import br.com.wisold.industrias.IndustriaDLO;
+import br.com.wisold.produtos.Produto;
+import br.com.wisold.produtos.ProdutoDLO;
+import br.com.wisold.usuarios.Usuario;
+
 @Controller
 @Transactional
 public class ProdutoController {
 	@Autowired
-	private ProdutoDlo dlo;
+	private ProdutoDLO dlo;
 	@Autowired
-	private IndustriaDlo industriaDlo;
+	private IndustriaDLO industriaDLO;
 	@Autowired
 	private HttpSession session;
+
 	private ModelAndView retorno = new ModelAndView();
 
 	private ModelMap mm = this.retorno.getModelMap();
@@ -37,23 +42,44 @@ public class ProdutoController {
 
 	@RequestMapping({ "/alterarProduto" })
 	public ModelAndView alterar(Long id) {
+		Produto produto = this.dlo.buscarPorId(id, getUsuario());
+
+		if (produto != null) {
+			this.session.setAttribute("industrias", listarIndustrias());
+			this.session.setAttribute("produto", produto);
+			this.retorno.setViewName("produto/manter");
+			this.mm.remove("mensagem");
+		} else {
+			this.retorno.addObject("mensagem", "O produto não existe!");
+			this.retorno.setViewName("produto/index");
+		}
+
 		return this.retorno;
 	}
 
 	@RequestMapping({ "/excluirProduto" })
 	public ModelAndView excluir(Long id) {
+
+		if (this.dlo.excluir(id, getUsuario())) {
+			this.retorno.setViewName("redirect:produtos");
+			this.mm.remove("mensagem");
+		} else {
+			this.retorno.addObject("mensagem", "Não foi possível deletar o produto");
+			this.retorno.setViewName("produto/index");
+		}
+
 		return this.retorno;
 	}
 
 	@RequestMapping({ "/manterProduto" })
 	public ModelAndView manter(Produto produto, Long idIndustria) {
 		Usuario usuario = getUsuario();
-		Industria industria = this.industriaDlo.buscarPorId(idIndustria, usuario);
+		Industria industria = this.industriaDLO.buscarPorId(idIndustria, usuario);
 
 		if (industria != null) {
 			produto.setUsuario(usuario);
 			produto.setIndustria(industria);
-			this.dlo.manterProduto(produto);
+			this.dlo.manter(produto);
 		}
 
 		this.retorno.setViewName("redirect:produtos");
@@ -72,7 +98,7 @@ public class ProdutoController {
 	}
 
 	private List<Industria> listarIndustrias() {
-		return this.industriaDlo.listar(getUsuario());
+		return this.industriaDLO.listar(getUsuario());
 	}
 
 	private Usuario getUsuario() throws NullPointerException {

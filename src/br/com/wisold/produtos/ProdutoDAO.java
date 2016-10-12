@@ -1,19 +1,24 @@
 package br.com.wisold.produtos;
 
-import br.com.wisold.industrias.Industria;
-import br.com.wisold.usuarios.Usuario;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+
+import org.hibernate.exception.ConstraintViolationException;
+import org.junit.Test;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
+import br.com.wisold.industrias.Industria;
+import br.com.wisold.usuarios.Usuario;
+
 @Repository
-public class ProdutoDao {
+public class ProdutoDAO {
 	@PersistenceContext
 	private EntityManager manager;
 
-	public Produto buscaPorId(Long id) {
+	public Produto buscarPorId(Long id) {
 		return (Produto) this.manager.find(Produto.class, id);
 	}
 
@@ -30,9 +35,12 @@ public class ProdutoDao {
 		this.manager.merge(t);
 	}
 
-	public void excluir(Produto t) {
-		this.manager.remove(t);
-	}
+/*	public void excluir(Produto t) {
+
+		this.manager.createQuery("UPDATE Usuario tFROM Produto WHERE t.usuario.id = :id").setParameter("id", t.getUsuario().getId());
+//		this.manager.remove(t);
+
+	}*/
 
 	public List<Produto> listarPorIndustria(Usuario usuario, Industria industria) {
 		return this.manager

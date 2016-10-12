@@ -1,16 +1,22 @@
 package br.com.wisold.produtos;
 
 import br.com.wisold.industrias.Industria;
+import br.com.wisold.persitencia.AbstractDLO;
 import br.com.wisold.usuarios.Usuario;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 @Repository
-public class ProdutoDlo {
+public class ProdutoDLO{
 	@Autowired
-	private ProdutoDao dao;
+	private ProdutoDAO dao;
 
 	public List<Produto> listar(Usuario usuario) {
 		List<Produto> retorno = new ArrayList();
@@ -28,7 +34,7 @@ public class ProdutoDlo {
 		return retorno;
 	}
 
-	public void manterProduto(Produto produto) {
+	public void manter(Produto produto) {
 		if (produto.getId() == null) {
 			this.dao.inserir(produto);
 		} else {
@@ -37,17 +43,18 @@ public class ProdutoDlo {
 	}
 
 	public Produto buscarPorId(Long id, Usuario usuario) {
-		Produto produto = this.dao.buscaPorId(id);
+		Produto produto = this.dao.buscarPorId(id);
 		if (validarDados(produto, usuario)) {
 			return produto;
 		}
 		return null;
 	}
 
-	public boolean excluir(Long id, Usuario usuario) {
-		Produto produto = this.dao.buscaPorId(id);
+	public boolean excluir(Long id, Usuario usuario){
+		Produto produto = this.dao.buscarPorId(id);
 		if (validarDados(produto, usuario)) {
-			this.dao.excluir(produto);
+			produto.setUsuario(null);
+			this.dao.alterar(produto);
 			return true;
 		}
 		return false;

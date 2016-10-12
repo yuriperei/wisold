@@ -4,9 +4,9 @@ import java.util.List;
 
 import br.com.wisold.usuarios.Usuario;
 
-public interface AbstractDao<Object> {
+public interface AbstractDAO<Object> {
 	
-	Object buscaPorId(Long id);
+	Object buscarPorId(Long id);
 	List<Object> listar(Usuario usuario);
 	void inserir(Object t);
 	void alterar(Object t);

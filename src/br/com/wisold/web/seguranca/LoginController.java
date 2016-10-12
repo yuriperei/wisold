@@ -1,7 +1,7 @@
 package br.com.wisold.web.seguranca;
 
 import br.com.wisold.usuarios.Usuario;
-import br.com.wisold.usuarios.UsuarioDlo;
+import br.com.wisold.usuarios.UsuarioDLO;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Transactional
 public class LoginController {
 	@Autowired
-	private UsuarioDlo dlo;
+	private UsuarioDLO dlo;
 	@Autowired
 	private HttpSession session;
 

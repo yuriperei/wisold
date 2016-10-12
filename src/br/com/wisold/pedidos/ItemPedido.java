@@ -21,7 +21,7 @@ public class ItemPedido {
 	private Double total;
 	private String embalagem;
 	
-	@OneToOne
+	@ManyToOne
 	private Produto produto;
 	
 	@ManyToOne

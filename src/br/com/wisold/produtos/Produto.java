@@ -1,11 +1,18 @@
 package br.com.wisold.produtos;
 
 import br.com.wisold.industrias.Industria;
+import br.com.wisold.pedidos.ItemPedido;
 import br.com.wisold.usuarios.Usuario;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity

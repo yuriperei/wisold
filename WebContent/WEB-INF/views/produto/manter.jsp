@@ -53,9 +53,9 @@
 										data-placeholder="Selecione a indústria" name="idIndustria"
 										id="idIndustria">
 										<c:forEach items="${industrias}" var="industria">
-											<option value="${industria.id}">${industria.nomeFantasia}</option>
+											<option value="${industria.id}" ${industria.id == produto.industria.id ? "selected" : "" }>${industria.nomeFantasia}</option>
 										</c:forEach>
-
+									
 									</select>
 								</div>
 							</div>

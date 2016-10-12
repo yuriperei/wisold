@@ -7,16 +7,18 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
+import br.com.wisold.persitencia.AbstractDAO;
+
 @Repository
-public class UsuarioDao {
+public class UsuarioDAO{
 	@PersistenceContext
 	private EntityManager manager;
 
-	public Usuario buscaPorId(Long id) {
+	public Usuario buscarPorId(Long id) {
 		return (Usuario) this.manager.find(Usuario.class, id);
 	}
 
-	public List<Usuario> listar() {
+	public List<Usuario> listar(Usuario usuario) {
 		return this.manager.createQuery("select t from Usuario t").getResultList();
 	}
 
@@ -29,7 +31,7 @@ public class UsuarioDao {
 	}
 
 	public void excluir(Usuario t) {
-		Usuario usuario = buscaPorId(t.getId());
+		Usuario usuario = buscarPorId(t.getId());
 		this.manager.remove(usuario);
 	}
 

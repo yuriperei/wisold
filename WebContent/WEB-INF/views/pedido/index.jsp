@@ -21,12 +21,10 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 		<h1>
-			Data Tables <small>advanced tables</small>
+			Pedidos <small>LISTA DE PEDIDOS</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li class="active"><i class="fa fa-dashboard"></i> Pedidos</li>
 		</ol>
 		</section>
 
@@ -44,9 +42,6 @@
 				</c:if>
 
 				<div class="box box-primary">
-					<div class="box-header">
-						<h3 class="box-title">Data Table With Full Features</h3>
-					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
 						<table id="tabela" class="table table-bordered table-striped">
@@ -65,7 +60,7 @@
 										<td>${pedido.codigo}</td>
 										<td>${pedido.cliente.nome}</td>
 										<td>${pedido.industria.nomeFantasia}</td>
-										<td>${pedido.total}</td>
+										<td>R$ ${pedido.total}</td>
 										<td><a class="btn .btn-xs"
 											href="visualizarPedido?id=${pedido.id}"> <i
 												class="fa fa-edit"></i> Visualizar

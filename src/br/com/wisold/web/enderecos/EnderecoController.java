@@ -1,10 +1,7 @@
 package br.com.wisold.web.enderecos;
 
-import br.com.wisold.clientes.Cliente;
-import br.com.wisold.enderecos.Endereco;
-import br.com.wisold.enderecos.EnderecoDlo;
-import br.com.wisold.industrias.Industria;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,11 +9,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.wisold.clientes.Cliente;
+import br.com.wisold.enderecos.Endereco;
+import br.com.wisold.enderecos.EnderecoDLO;
+import br.com.wisold.industrias.Industria;
+
 @Controller
 @Transactional
 public class EnderecoController {
 	@Autowired
-	private EnderecoDlo dlo;
+	private EnderecoDLO dlo;
 	@Autowired
 	private HttpSession session;
 	private ModelAndView retorno = new ModelAndView();
@@ -39,7 +41,7 @@ public class EnderecoController {
 			this.retorno.setViewName("redirect:alterarIndustria?id=" + getIndustria().getId());
 		}
 
-		this.dlo.manterEndereco(endereco);
+		this.dlo.manter(endereco);
 
 		return this.retorno;
 	}

@@ -43,121 +43,119 @@ onload = function(){
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 		<h1>
-			Data Tables <small>advanced tables</small>
+			Emitir Pedido <small>DETALHES DO PEDIDO - PARTE 3/3</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li><a href="#"><i class="fa fa-dashboard"></i> Pedido</a></li>
+			<li class="active"><a href="#">Emitir pedido</a></li>
 		</ol>
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content"> 
 		<div class="row">
 			<form class="form-horizontal" action="manterPedido" method="post">
-				<div class="col-xs-12">
 
-					<!-- Horizontal Form -->
+				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title">Indústria</h3>
+							<h3 class="box-title">Detalhes do Pedido</h3>
 						</div>
 						<!-- /.box-header -->
-						<!-- form start -->
 
 						<div class="box-body">
-							<%-- <input name="id" type="hidden" value="${industria.id}"> --%>
 
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Cliente</label>
-								<div class="col-sm-10">
-									<select class="form-control select2"
-										data-placeholder="Selecione o cliente" name="cliente.id"
-										id="cliente.id">
+							<div class="col-md-8">
+
+								<div class="form-group col-md-4">
+									<label>Código do Pedido</label> <input type="text"
+										class="form-control" id="codigo" name="codigo"
+										placeholder="Código do pedido" autofocus required>
+								</div>
+								<!-- /.form-group -->
+
+								<div class="form-group col-md-12">
+									<label>Cliente</label> <select class="form-control select2"
+										data-placeholder="Selecione um cliente" name="cliente.id"
+										style="width: 100%;">
 										<c:forEach items="${clientes}" var="cliente">
 											<option value="${cliente.id}">${cliente.nome}</option>
 										</c:forEach>
-
 									</select>
 								</div>
-							</div>
+								<!-- /.form-group -->
 
+								<div class="form-group col-md-12">
+									<label>Indústria</label> <input type="text"
+										class="form-control" id="codigo" name="codigo"
+										placeholder="Indústria" value="${industria.nomeFantasia}"
+										disabled="true">
+								</div>
+								<!-- /.form-group -->
+
+							</div>
+							<!-- /.col -->
 
 						</div>
 						<!-- /.box-body -->
 
-
-
 					</div>
 					<!-- /.box -->
-
 				</div>
 				<!-- /.col -->
 
-
-				<div class="col-xs-12">
-
-					<c:if test="${not empty mensagem}">
-						<div class="alert alert-danger alert-dismissable">
-							<button type="button" class="close" data-dismiss="alert"
-								aria-hidden="true">&times;</button>
-							<p>${mensagem}</p>
-						</div>
-					</c:if>
-
-
-					<div class="box box-primary">
+				<div class="col-md-12">
+				
+					<div class="box box-default">
 						<div class="box-header with-border">
 							<h3 class="box-title">Produtos</h3>
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
-							<table class="table table-condensed">
-								<tr>
-									<th>Código</th>
-									<th>Descrição</th>
-									<th>Quantidade</th>
-									<th>Preço</th>
-									<th>Total</th>
-								</tr>
 
-								<c:forEach items="${itensPedido}" var="item">
+							<div class="col-md-12">
+								<table class="table table-bordered">
 									<tr>
-										<td>${item.produto.codigoProduto}</td>
-										<td>${item.produto.nome}</td>
-										<td>${item.quantidade}</td>
-										<td>${item.valor}</td>
-										<td>${item.total}</td>
+										<th style="width: 100px">Código</th>
+										<th>Descrição</th>
+										<th style="width: 70px">Qtd.</th>
+										<th style="width: 100px">Preço</th>
+										<th style="width: 130px">Total</th>
 									</tr>
+									<c:forEach items="${itensPedido}" var="item">
+										<tr>
+											<td>${item.produto.codigoProduto}</td>
+											<td>${item.produto.nome}</td>
+											<td>${item.quantidade}</td>
+											<td>R$ ${item.valor}</td>
+											<td>R$ ${item.total}</td>
+										</tr>
 
-									<script>writeTotal(${item.total})</script>
-								</c:forEach>
+										<script>writeTotal(${item.total})</script>
+									</c:forEach>
+								</table>
+							</div>
 
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<th>Total</th>
-									<td id="td-total">0</td>
-									<input name="total" id="total" type="hidden" >
-								</tr>
-							</table>
+							<div class="col-md-3 pull-right">
+
+								<table class="table table-bordered">
+									<tr>
+										<th style="width: 150px">VALOR TOTAL:</th>
+										<td>R$ <span id="td-total">0</span></td>
+										<input name="total" id="total" type="hidden">
+									</tr>
+								</table>
+
+							</div>
+							<!-- /.div col -->
 						</div>
 						<!-- /.box-body -->
-
-
-						<div class="box-footer">
+						<div class="box-footer clearfix">
 							<button class="btn btn-primary pull-right">Finalizar
 								pedido</button>
 						</div>
-						<!-- /.box-footer -->
-
 					</div>
 					<!-- /.box -->
-
-
-
 				</div>
 				<!-- /.col -->
 
@@ -168,6 +166,8 @@ onload = function(){
 	</div>
 	<!-- /.content-wrapper -->
 	<%@ include file="../estrutura/rodape.jspf"%>
+
+
 
 	<!-- Select2 -->
 	<script src="resources/plugins/select2/select2.full.min.js"
@@ -208,6 +208,8 @@ onload = function(){
 	<script src="resources/dist/js/app.min.js" type="text/javascript"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="resources/dist/js/demo.js" type="text/javascript"></script>
+	<!-- Select2 -->
+	<link rel="stylesheet" href="resources/plugins/select2/select2.min.css">
 	<!-- page script -->
 	<script type="text/javascript">
 	

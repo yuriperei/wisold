@@ -6,13 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import br.com.wisold.persitencia.AbstractDLO;
 import br.com.wisold.usuarios.Usuario;
 
 @Repository
-public class ClienteDlo {
+public class ClienteDLO implements AbstractDLO<Cliente>{
 	@Autowired
-	private ClienteDao dao;
+	private ClienteDAO dao;
 
+	@Override
 	public List<Cliente> listar(Usuario usuario) {
 		List<Cliente> retorno = new ArrayList();
 
@@ -21,7 +23,8 @@ public class ClienteDlo {
 		return retorno;
 	}
 
-	public void manterCliente(Cliente cliente) {
+	@Override
+	public void manter(Cliente cliente) {
 		if (cliente.getId() == null) {
 			this.dao.inserir(cliente);
 		} else {
@@ -29,16 +32,18 @@ public class ClienteDlo {
 		}
 	}
 
+	@Override
 	public Cliente buscarPorId(Long id, Usuario usuario) {
-		Cliente cliente = this.dao.buscaPorId(id);
+		Cliente cliente = this.dao.buscarPorId(id);
 		if (validarDados(cliente, usuario)) {
 			return cliente;
 		}
 		return null;
 	}
 
+	@Override
 	public boolean excluir(Long id, Usuario usuario) {
-		Cliente cliente = this.dao.buscaPorId(id);
+		Cliente cliente = this.dao.buscarPorId(id);
 		if (validarDados(cliente, usuario)) {
 			this.dao.excluir(cliente);
 			return true;
@@ -52,4 +57,5 @@ public class ClienteDlo {
 		}
 		return false;
 	}
+
 }

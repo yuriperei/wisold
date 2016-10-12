@@ -1,10 +1,9 @@
 package br.com.wisold.web.industrias;
 
-import br.com.wisold.industrias.Industria;
-import br.com.wisold.industrias.IndustriaDlo;
-import br.com.wisold.usuarios.Usuario;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,11 +11,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.wisold.industrias.Industria;
+import br.com.wisold.industrias.IndustriaDLO;
+import br.com.wisold.usuarios.Usuario;
+
 @Controller
 @Transactional
 public class IndustriaController {
 	@Autowired
-	private IndustriaDlo dlo;
+	private IndustriaDLO dlo;
 	@Autowired
 	private HttpSession session;
 	private ModelAndView retorno = new ModelAndView();
@@ -47,6 +50,7 @@ public class IndustriaController {
 
 	@RequestMapping({ "/excluirIndustria" })
 	public ModelAndView excluir(Long id) {
+		this.session.removeAttribute("cliente");
 		if (this.dlo.excluir(id, getUsuario())) {
 			this.retorno.setViewName("redirect:industrias");
 			this.mm.remove("mensagem");
@@ -62,7 +66,7 @@ public class IndustriaController {
 	public ModelAndView manter(Industria industria) {
 		industria.setUsuario(getUsuario());
 
-		this.dlo.manterIndustria(industria);
+		this.dlo.manter(industria);
 		this.retorno.setViewName("redirect:industrias");
 		return this.retorno;
 	}

@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Clientes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Endereço</title>
 
 <!-- DATA TABLES -->
 <link href="resources/plugins/datatables/dataTables.bootstrap.css"
@@ -21,135 +21,167 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 		<h1>
-			Data Tables <small>advanced tables</small>
+			Manter Endereço <small>INFORMAÇÕES SOBRE O ENDEREÇO</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li class="active"><a href="#"><i class="fa fa-dashboard"></i>
+					Endereço</a></li>
 		</ol>
 		</section>
+
 
 		<!-- Main content -->
 		<section class="content">
 		<div class="row">
-			<div class="col-xs-12">
+			<form class="form-horizontal" action="manterEndereco" method="post">
+				<input name="id" type="hidden" value="${endereco.id}">
 
-				<!-- Horizontal Form -->
-				<div class="box box-info">
-					<div class="box-header with-border">
-						<h3 class="box-title">Cadastro de endereço</h3>
-					</div>
-					<!-- /.box-header -->
-					<!-- form start -->
-					<form class="form-horizontal" action="manterEndereco">
-						<input name="id" type="hidden" value="${endereco.id}">
+				<div class="col-md-12">
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title">Detalhes do Endereço</h3>
+						</div>
+						<!-- /.box-header -->
+
 						<div class="box-body">
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Cidade</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cidade"
-										name="cidade" placeholder="Cidade" value="${endereco.cidade}">
+
+							<div class="col-md-8">
+
+								<div class="form-group col-md-12">
+									<label>Rua</label> <input type="text" class="form-control"
+										id="rua" name="rua" placeholder="Informe o nome da rua"
+										value="${endereco.rua}" required>
 								</div>
-								<label for="inputEmail3" class="col-sm-2 control-label">Estado</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control" id="estado"
-										name="estado" placeholder="Estado" value="${endereco.estado}">
-								</div>
-								<label for="inputEmail3" class="col-sm-2 control-label">País</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control" id="pais" name="pais"
-										placeholder="País" value="${endereco.pais}">
-								</div>
+								<!-- /.form-group -->
 							</div>
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Bairro</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="bairro"
-										name="bairro" placeholder="Bairro" value="${endereco.bairro}">
+
+							<div class="col-md-8">
+
+								<div class="form-group col-md-3">
+									<label>Número</label> <input type="text" class="form-control"
+										id="numero" name="numero" placeholder="Número"
+										value="${endereco.numero}" required>
 								</div>
-								<label for="inputEmail3" class="col-sm-2 control-label">CEP</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cep" name="cep"
-										placeholder="CEP" value="${endereco.cep}">
+								<!-- /.form-group -->
+
+
+								<div class="col-md-4">
+									<label>Complemento</label> <input type="text"
+										class="form-control" id="complemento" name="complemento"
+										placeholder="Complemento" value="${endereco.complemento}">
 								</div>
+								<!-- /.form-group -->
+
 							</div>
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Rua</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="rua" name="rua"
-										placeholder="Rua" value="${endereco.rua}">
+							<!-- /.col -->
+
+							<div class="col-md-8">
+								<div class="form-group col-md-7">
+									<label>Bairro</label> <input type="text" class="form-control"
+										id="bairro" name="bairro" placeholder="Informe o bairro"
+										value="${endereco.bairro}" required>
 								</div>
+								<!-- /.form-group -->
+								
+								<div class="col-md-3">
+									<label>CEP</label> <input type="text" class="form-control"
+										id="cep" name="cep" placeholder="Informe o CEP"
+										value="${endereco.cep}" required>
+								</div>
+								<!-- /.form-group -->
+
 							</div>
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Número</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="numero"
-										name="numero" placeholder="Número" value="${endereco.numero}">
+
+
+							<div class="col-md-8">
+							
+							<div class="form-group col-md-4">
+									<label>Cidade</label> <input type="text" class="form-control"
+										id="cidade" name="cidade" placeholder="Cidade"
+										value="${endereco.cidade}" required>
 								</div>
-								<label for="inputEmail3" class="col-sm-2 control-label">Complemento</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="complemento"
-										name="complemento" placeholder="Complemento"
-										value="${endereco.complemento}">
+								<!-- /.form-group -->
+								
+								<div class="col-md-4">
+									<label>Estado</label> <input type="text" class="form-control"
+										id="estado" name="estado" placeholder="Estado"
+										value="${endereco.estado}" required>
 								</div>
+								<!-- /.form-group -->
+								
+								<div class="col-md-2">
+									<label>País</label> <input type="text" class="form-control"
+										id="pais" name="pais" placeholder="País"
+										value="${endereco.pais}" required>
+								</div>
+								<!-- /.form-group -->
 							</div>
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Tipo</label>
-								<div class="col-sm-3">
-									<select class="form-control select2"
+
+
+							<div class="col-md-8">
+								<div class="form-group col-md-12">
+									<label>Referencia</label> <input type="text"
+										class="form-control" id="referencia" name="referencia"
+										placeholder="Referência" value="${endereco.referencia}">
+								</div>
+								<!-- /.form-group -->
+
+							</div>
+							<!-- /.col -->
+
+							<div class="col-md-8">
+								<div class="form-group col-md-4">
+									<label>Tipo de endereço</label> <select
+										class="form-control select2"
 										data-placeholder="Selecione o nome" name="tipo">
-										<c:choose>
-											<c:when test="${not empty endereco.tipo}">
-												<option value="${endereco.tipo}">${endereco.tipo}</option>
-											</c:when>
-											<c:when test="${empty endereco.tipo}">
-												<option value="Endereço da loja">Endereço da loja</option>
-												<option value="Endereço de entrega">Endereço de entrega</option>
-											</c:when>
-										</c:choose>
+										<option value="Endereço da loja"
+											${endereco.tipo eq 'Endereço de loja' ? "selected" : "" }>Endereço
+											da loja</option>
+										<option value="Endereço de entrega"
+											${endereco.tipo eq 'Endereço de entrega' ? "selected" : "" }>Endereço
+											de entrega</option>
+
 									</select>
 
-									<!-- /.col -->
-								</div>
-
-								<label for="inputEmail3" class="col-sm-2 control-label">Referencia</label>
-								<div class="col-sm-5">
-									<input type="text" class="form-control" id="referencia"
-										name="referencia" placeholder="Referência"
-										value="${endereco.referencia}">
-								</div>
-
-								<!-- /.form-group -->
-							</div>
-
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Observação</label>
-								<div class="col-sm-10">
-									<textarea class="form-control" rows="2" placeholder="Entre com sua observação ..."
-										name="observacao" value="${endereco.observacao}"></textarea>
 								</div>
 								<!-- /.form-group -->
-							</div>
 
-							<!-- /.box-body -->
-
-							<div class="box-footer">
-								<button type="submit" class="btn btn-info pull-right">Salvar</button>
 							</div>
-							<!-- /.box-footer -->
-					</form>
+							<!-- /.col -->
+
+							<div class="col-md-8">
+								<div class="form-group col-md-10">
+									<label>Observação</label>
+									<textarea class="form-control" rows="2"
+										placeholder="Entre com sua observação ..." name="observacao">${endereco.observacao}</textarea>
+
+								</div>
+								<!-- /.form-group -->
+
+							</div>
+							<!-- /.col -->
+
+
+
+						</div>
+						<!-- /.box-body -->
+
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary pull-right">Salvar</button>
+						</div>
+						<!-- /.box-footer -->
+
+					</div>
+					<!-- /.box -->
 				</div>
+				<!-- /.col -->
 
-				<!-- /.box -->
-
-
-			</div>
-
-			<!-- /.col -->
+			</form>
 		</div>
 		<!-- /.row --> </section>
 		<!-- /.content -->
+
+
 	</div>
 	<!-- /.content-wrapper -->
 	<%@ include file="../estrutura/rodape.jspf"%>

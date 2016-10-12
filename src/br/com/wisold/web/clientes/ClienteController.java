@@ -1,10 +1,9 @@
 package br.com.wisold.web.clientes;
 
-import br.com.wisold.clientes.Cliente;
-import br.com.wisold.clientes.ClienteDlo;
-import br.com.wisold.usuarios.Usuario;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,11 +11,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.wisold.clientes.Cliente;
+import br.com.wisold.clientes.ClienteDLO;
+import br.com.wisold.usuarios.Usuario;
+
 @Controller
 @Transactional
 public class ClienteController {
 	@Autowired
-	private ClienteDlo dlo;
+	private ClienteDLO dlo;
 	@Autowired
 	private HttpSession session;
 	private ModelAndView retorno = new ModelAndView();
@@ -47,6 +50,7 @@ public class ClienteController {
 
 	@RequestMapping({ "/excluirCliente" })
 	public ModelAndView excluir(Long id) {
+		this.session.removeAttribute("industria");
 		if (this.dlo.excluir(id, getUsuario())) {
 			this.retorno.setViewName("redirect:clientes");
 			this.mm.remove("mensagem");
@@ -62,7 +66,7 @@ public class ClienteController {
 	public ModelAndView manter(Cliente cliente) {
 		cliente.setUsuario(getUsuario());
 
-		this.dlo.manterCliente(cliente);
+		this.dlo.manter(cliente);
 		this.retorno.setViewName("redirect:clientes");
 		return this.retorno;
 	}

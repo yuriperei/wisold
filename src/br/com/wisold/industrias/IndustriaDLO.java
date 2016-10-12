@@ -1,25 +1,45 @@
 package br.com.wisold.industrias;
 
-import br.com.wisold.usuarios.Usuario;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import br.com.wisold.usuarios.Usuario;
+
 @Repository
-public class IndustriaDlo {
+public class IndustriaDLO {
 	@Autowired
-	private IndustriaDao dao;
+	private IndustriaDAO dao;
+	
+	@Autowired
+	private HttpSession session;
 
 	public List<Industria> listar(Usuario usuario) {
 		List<Industria> retorno = new ArrayList();
 
 		retorno = this.dao.listar(usuario);
-
+	
 		return retorno;
 	}
+	
+/*	public void testar(String nome){
+		List<Industria> retorno = new ArrayList();
 
-	public void manterIndustria(Industria industria) {
+		retorno = this.dao.listar((Usuario) session.getAttribute("user"));
+
+		for (Industria industria : retorno) {
+			System.out.println(">>>"+industria.getNomeFantasia());
+		}
+//		Usuario u = (Usuario) session.getAttribute("user");
+		System.out.println(">>>"+nome);
+	}*/
+	
+
+	public void manter(Industria industria) {
 		if (industria.getId() == null) {
 			this.dao.inserir(industria);
 		} else {
@@ -50,4 +70,5 @@ public class IndustriaDlo {
 		}
 		return false;
 	}
+	
 }

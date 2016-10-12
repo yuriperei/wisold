@@ -10,6 +10,26 @@
 <link href="resources/plugins/datatables/dataTables.bootstrap.css"
 	rel="stylesheet" type="text/css" />
 <%@ include file="../estrutura/head.jspf"%>
+
+<script>
+var total = 0;
+
+function writeTotal(valor) {
+total = total + valor		
+
+}
+
+function exibir(){
+	document.getElementById("td-total").innerHTML = total;
+}
+
+onload = function(){
+	exibir();
+};
+
+
+</script>
+
 </head>
 <body
 	class="skin-blue-light fixed sidebar-mini  sidebar-mini wysihtml5-supported skin-blue">
@@ -21,134 +41,111 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 		<h1>
-			Data Tables <small>advanced tables</small>
+			Pedido #${pedido.codigo} <small>DETALHES DO PEDIDO</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li><a href="#"><i class="fa fa-dashboard"></i> Pedido</a></li>
+			<li class="active"><a href="#">Visualizar pedido</a></li>
 		</ol>
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content"> 
 		<div class="row">
 			<form class="form-horizontal" action="manterPedido" method="post">
-				<div class="col-xs-12">
 
-					<!-- Horizontal Form -->
+				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title">Indústria</h3>
+							<h3 class="box-title">Detalhes do Pedido</h3>
 						</div>
 						<!-- /.box-header -->
-						<!-- form start -->
 
 						<div class="box-body">
 
+							<div class="col-md-8">
 
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Código</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control" id="codigo"
-										name="codigo" placeholder="Código do pedido" readonly="true"
-										value="${pedido.codigo}">
+								<div class="form-group col-md-4">
+									<label>Código do Pedido</label> <input type="text"
+										class="form-control" id="codigo" name="codigo"
+										placeholder="Código do pedido" disabled="true" value="${pedido.codigo}" required>
 								</div>
-								<label for="inputEmail3" class="col-sm-1 control-label">Total</label>
-								<div class="col-sm-6">
-									<input type="text" class="form-control" id="total" readonly="true" name="total"
-										placeholder="Total" value="${pedido.total}">
-								</div>
-							</div>
+								<!-- /.form-group -->
 
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Cliente</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="clienteNome"
-										name="clienteNome" placeholder="Nome cliente" readonly="true"
-										value="${pedido.cliente.nome}">
+								<div class="form-group col-md-12">
+									<label>Cliente</label> <select class="form-control select2 disabled"
+										data-placeholder="Selecione um cliente" name="cliente.id"
+										style="width: 100%;" disabled="true">
+											<option value="${pedido.cliente.id}" selected="selected">${pedido.cliente.nome}</option>
+									</select>
 								</div>
-							</div>
-							
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Indústria</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="industriaNome"
-										name="industriaNome" placeholder="Nome da indústria" readonly="true"
-										value="${pedido.industria.nomeFantasia}">
+								<!-- /.form-group -->
+
+								<div class="form-group col-md-12">
+									<label>Indústria</label> <input type="text"
+										class="form-control" id="codigo" name="codigo"
+										placeholder="Indústria" value="${pedido.industria.nomeFantasia}"
+										disabled="true">
 								</div>
+								<!-- /.form-group -->
+
 							</div>
+							<!-- /.col -->
 
 						</div>
 						<!-- /.box-body -->
 
-						<div class="box-footer">
-							<button type="submit" class="btn btn-primary pull-right">Salvar</button>
-						</div>
-						<!-- /.box-footer -->
-
-
 					</div>
 					<!-- /.box -->
-
 				</div>
 				<!-- /.col -->
 
-
-				<div class="col-xs-12">
-
-					<c:if test="${not empty mensagem}">
-						<div class="alert alert-danger alert-dismissable">
-							<button type="button" class="close" data-dismiss="alert"
-								aria-hidden="true">&times;</button>
-							<p>${mensagem}</p>
-						</div>
-					</c:if>
-
-					<!-- Horizontal Form -->
-					<div class="box box-primary">
+				<div class="col-md-12">
+				
+					<div class="box box-default">
 						<div class="box-header with-border">
 							<h3 class="box-title">Produtos</h3>
 						</div>
 						<!-- /.box-header -->
-
-
 						<div class="box-body">
-							<table id="tabela" class="table table-bordered table-striped">
-								<thead>
+
+							<div class="col-md-12">
+								<table class="table table-bordered">
 									<tr>
-										<th>Código</th>
+										<th style="width: 100px">Código</th>
 										<th>Descrição</th>
-										<th>Quantidade</th>
-										<th>Preço</th>
-										<th>Total</th>
+										<th style="width: 70px">Qtd.</th>
+										<th style="width: 100px">Preço</th>
+										<th style="width: 130px">Total</th>
 									</tr>
-								</thead>
-								<tbody>
 									<c:forEach items="${pedido.itens}" var="item">
 										<tr>
 											<td>${item.produto.codigoProduto}</td>
 											<td>${item.produto.nome}</td>
 											<td>${item.quantidade}</td>
-											<td>${item.valor}</td>
-											<td>${item.total}</td>
+											<td>R$ ${item.valor}</td>
+											<td>R$ ${item.total}</td>
 										</tr>
+
+										<script>writeTotal(${item.total})</script>
 									</c:forEach>
-									
-								</tbody>
-							</table>
-							<!-- /.box-body -->
-						</div>
+								</table>
+							</div>
 
-						<div class="box-footer">
-							<button class="btn btn-primary pull-right">Finalizar
-								pedido</button>
-						</div>
-						<!-- /.box-footer -->
+							<div class="col-md-3 pull-right">
 
+								<table class="table table-bordered">
+									<tr>
+										<th style="width: 150px">VALOR TOTAL:</th>
+										<td>R$ <span id="td-total">0</span></td>
+									</tr>
+								</table>
+
+							</div>
+							<!-- /.div col -->
+						</div>
 					</div>
 					<!-- /.box -->
-
 				</div>
 				<!-- /.col -->
 
@@ -156,6 +153,7 @@
 		</div>
 		<!-- /.row --> </section>
 		<!-- /.content -->
+
 	</div>
 	<!-- /.content-wrapper -->
 	<%@ include file="../estrutura/rodape.jspf"%>
@@ -192,7 +190,8 @@
 	<!-- FastClick -->
 	<script src="resources/plugins/fastclick/fastclick.min.js"
 		type="text/javascript"></script>
-
+	<!-- Select2 -->
+	<link rel="stylesheet" href="resources/plugins/select2/select2.min.css">
 	<script src="resources/plugins/iCheck/icheck.min.js"
 		type="text/javascript"></script>
 	<!-- AdminLTE App -->

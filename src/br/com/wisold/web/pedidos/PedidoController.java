@@ -12,28 +12,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.wisold.clientes.Cliente;
-import br.com.wisold.clientes.ClienteDlo;
+import br.com.wisold.clientes.ClienteDLO;
 import br.com.wisold.industrias.Industria;
-import br.com.wisold.industrias.IndustriaDlo;
+import br.com.wisold.industrias.IndustriaDLO;
 import br.com.wisold.pedidos.ItemPedido;
 import br.com.wisold.pedidos.Pedido;
-import br.com.wisold.pedidos.PedidoDlo;
+import br.com.wisold.pedidos.PedidoDLO;
 import br.com.wisold.produtos.Produto;
-import br.com.wisold.produtos.ProdutoDlo;
+import br.com.wisold.produtos.ProdutoDLO;
 import br.com.wisold.usuarios.Usuario;
 
 @Controller
 @Transactional
 public class PedidoController {
 	@Autowired
-	private PedidoDlo dlo;
+	private PedidoDLO dlo;
 	@Autowired
-	private IndustriaDlo industriaDlo;
+	private IndustriaDLO industriaDLO;
 	@Autowired
-	private ClienteDlo clienteDlo;
+	private ClienteDLO clienteDLO;
 	private List<ItemPedido> itensPedido;
 	@Autowired
-	private ProdutoDlo produtoDlo;
+	private ProdutoDLO produtoDLO;
 	@Autowired
 	private HttpSession session;
 	private ModelAndView retorno = new ModelAndView();
@@ -48,7 +48,7 @@ public class PedidoController {
 
 	@RequestMapping({ "/adicionarIndustria" })
 	public String cadastrar(Long idIndustria) {
-		Industria industria = this.industriaDlo.buscarPorId(idIndustria, getUsuario());
+		Industria industria = this.industriaDLO.buscarPorId(idIndustria, getUsuario());
 
 		if ((industria != null) && (!industria.getProdutos().isEmpty())) {
 			this.session.setAttribute("produtos", listarProdutos(industria));
@@ -84,7 +84,7 @@ public class PedidoController {
 	@RequestMapping({ "/gerarPedido" })
 	public ModelAndView gerarPedido() {
 
-		List<Cliente> clientes = clienteDlo.listar(getUsuario());
+		List<Cliente> clientes = clienteDLO.listar(getUsuario());
 		session.setAttribute("clientes", clientes);
 
 		retorno.setViewName("pedido/detalhes");
@@ -131,7 +131,7 @@ public class PedidoController {
 		pedido.setIndustria((Industria) session.getAttribute("industria"));
 		pedido.setItens(this.manterItensPedido(pedido));
 
-		dlo.manterPedido(pedido);
+		dlo.manter(pedido);
 		this.retorno.setViewName("redirect:pedidos");
 		return this.retorno;
 	}
@@ -148,15 +148,15 @@ public class PedidoController {
 	}
 
 	private List<Industria> listarIndustrias() {
-		return this.industriaDlo.listar(getUsuario());
+		return this.industriaDLO.listar(getUsuario());
 	}
 
 	private List<Produto> listarProdutos(Industria industria) {
-		return this.produtoDlo.listarPorIndustria(getUsuario(), industria);
+		return this.produtoDLO.listarPorIndustria(getUsuario(), industria);
 	}
 
 	private List<Cliente> listarClientes() {
-		return this.clienteDlo.listar(getUsuario());
+		return this.clienteDLO.listar(getUsuario());
 	}
 
 	private Usuario getUsuario() throws NullPointerException {

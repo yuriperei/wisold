@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 import br.com.wisold.util.Validador;
 
 @Repository
-public class UsuarioDlo {
+public class UsuarioDLO {
 	@Autowired
-	private UsuarioDao dao;
+	private UsuarioDAO dao;
 
 	public boolean existeUsuario(String email, String senha) {
 		boolean retorno = false;

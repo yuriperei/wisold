@@ -2,15 +2,17 @@ package br.com.wisold.enderecos;
 
 import br.com.wisold.clientes.Cliente;
 import br.com.wisold.industrias.Industria;
+import br.com.wisold.persitencia.AbstractDLO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class EnderecoDlo {
+public class EnderecoDLO{
 	@Autowired
-	private EnderecoDao dao;
+	private EnderecoDAO dao;
 
-	public void manterEndereco(Endereco endereco) {
+	public void manter(Endereco endereco) {
 		if (endereco.getId() == null) {
 			this.dao.inserir(endereco);
 		} else {
@@ -19,7 +21,7 @@ public class EnderecoDlo {
 	}
 
 	public Endereco buscarPorId(Long id, Cliente cliente) {
-		Endereco endereco = this.dao.buscaPorId(id);
+		Endereco endereco = this.dao.buscarPorId(id);
 		if (validarDados(cliente, endereco)) {
 			return endereco;
 		}
@@ -27,7 +29,7 @@ public class EnderecoDlo {
 	}
 
 	public Endereco buscarPorId(Long id, Industria industria) {
-		Endereco endereco = this.dao.buscaPorId(id);
+		Endereco endereco = this.dao.buscarPorId(id);
 		if (validarDados(industria, endereco)) {
 			return endereco;
 		}
@@ -35,7 +37,7 @@ public class EnderecoDlo {
 	}
 
 	public boolean excluir(Long id, Cliente cliente) {
-		Endereco endereco = this.dao.buscaPorId(id);
+		Endereco endereco = this.dao.buscarPorId(id);
 		if (validarDados(cliente, endereco)) {
 			this.dao.excluir(endereco);
 			return true;
@@ -44,7 +46,7 @@ public class EnderecoDlo {
 	}
 
 	public boolean excluir(Long id, Industria industria) {
-		Endereco endereco = this.dao.buscaPorId(id);
+		Endereco endereco = this.dao.buscarPorId(id);
 		if (validarDados(industria, endereco)) {
 			this.dao.excluir(endereco);
 			return true;

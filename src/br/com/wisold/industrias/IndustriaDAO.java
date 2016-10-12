@@ -1,4 +1,4 @@
-package br.com.wisold.enderecos;
+package br.com.wisold.industrias;
 
 import br.com.wisold.usuarios.Usuario;
 import java.util.List;
@@ -8,28 +8,28 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class EnderecoDao {
+public class IndustriaDAO {
 	@PersistenceContext
 	private EntityManager manager;
 
-	public Endereco buscaPorId(Long id) {
-		return (Endereco) this.manager.find(Endereco.class, id);
+	public Industria buscaPorId(Long id) {
+		return (Industria) this.manager.find(Industria.class, id);
 	}
 
-	public List<Endereco> listar(Usuario usuario) {
-		return this.manager.createQuery("select t from Cliente t WHERE t.usuario.id = :id")
+	public List<Industria> listar(Usuario usuario) {
+		return this.manager.createQuery("select t from Industria t WHERE t.usuario.id = :id")
 				.setParameter("id", usuario.getId()).getResultList();
 	}
 
-	public void inserir(Endereco t) {
+	public void inserir(Industria t) {
 		this.manager.persist(t);
 	}
 
-	public void alterar(Endereco t) {
+	public void alterar(Industria t) {
 		this.manager.merge(t);
 	}
 
-	public void excluir(Endereco t) {
+	public void excluir(Industria t) {
 		this.manager.remove(t);
 	}
 }
