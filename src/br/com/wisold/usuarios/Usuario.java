@@ -1,14 +1,21 @@
 package br.com.wisold.usuarios;
 
-import br.com.wisold.clientes.Cliente;
-import br.com.wisold.industrias.Industria;
-import br.com.wisold.produtos.Produto;
+import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import br.com.wisold.clientes.Cliente;
+import br.com.wisold.industrias.Industria;
+import br.com.wisold.produtos.Produto;
 
 @Entity
 @Table(name = "usuarios")
@@ -20,6 +27,8 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private Integer tipo;
+	@Temporal(TemporalType.DATE)
+	private Date registro;
 	@OneToMany(mappedBy = "usuario")
 	private List<Cliente> clientes;
 	@OneToMany(mappedBy = "usuario")
@@ -89,6 +98,14 @@ public class Usuario {
 
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
+	}
+
+	public Date getRegistro() {
+		return registro;
+	}
+
+	public void setRegistro(Date registro) {
+		this.registro = registro;
 	}
 
 	public int hashCode() {

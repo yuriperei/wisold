@@ -26,18 +26,6 @@ public class IndustriaDLO {
 		return retorno;
 	}
 	
-/*	public void testar(String nome){
-		List<Industria> retorno = new ArrayList();
-
-		retorno = this.dao.listar((Usuario) session.getAttribute("user"));
-
-		for (Industria industria : retorno) {
-			System.out.println(">>>"+industria.getNomeFantasia());
-		}
-//		Usuario u = (Usuario) session.getAttribute("user");
-		System.out.println(">>>"+nome);
-	}*/
-	
 
 	public void manter(Industria industria) {
 		if (industria.getId() == null) {
@@ -58,7 +46,8 @@ public class IndustriaDLO {
 	public boolean excluir(Long id, Usuario usuario) {
 		Industria industria = this.dao.buscaPorId(id);
 		if (validarDados(industria, usuario)) {
-			this.dao.excluir(industria);
+			industria.setUsuario(null);
+			this.dao.alterar(industria);
 			return true;
 		}
 		return false;

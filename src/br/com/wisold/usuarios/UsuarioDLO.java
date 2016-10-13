@@ -1,5 +1,7 @@
 package br.com.wisold.usuarios;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -29,5 +31,16 @@ public class UsuarioDLO {
 			usuario = null;
 		}
 		return usuario;
+	}
+	
+	public void manter(Usuario usuario){
+		
+		if(usuario.getId() == null){
+			usuario.setRegistro(new Date());
+			this.dao.inserir(usuario);
+		}else{
+			this.dao.alterar(usuario);
+		}
+		
 	}
 }

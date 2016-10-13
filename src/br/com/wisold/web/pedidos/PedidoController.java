@@ -77,6 +77,7 @@ public class PedidoController {
 
 		this.itensPedido.add(itemPedido);
 		this.session.setAttribute("itensPedido", itensPedido);
+		this.session.setAttribute("mensagem", "Produto "+ produto.getNome() + " adicionado com sucesso");
 
 		return "pedido/manter_produto";
 	}
@@ -88,6 +89,8 @@ public class PedidoController {
 		session.setAttribute("clientes", clientes);
 
 		retorno.setViewName("pedido/detalhes");
+		this.session.removeAttribute("mensagem");
+		
 		return this.retorno;
 	}
 	

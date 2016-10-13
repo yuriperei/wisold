@@ -16,9 +16,12 @@ public class LoginController {
 	private UsuarioDLO dlo;
 	@Autowired
 	private HttpSession session;
+	
+	private ModelAndView retorno = new ModelAndView();
 
 	@RequestMapping({ "/login" })
 	public String loginForm() {
+		this.session.removeAttribute("deslogado");
 		return "login/index";
 	}
 
@@ -29,17 +32,15 @@ public class LoginController {
 
 	@RequestMapping({ "/sistema" })
 	public ModelAndView efetuaLogin(Usuario usuario) {
-		ModelAndView retorno = new ModelAndView();
 		if (this.dlo.existeUsuario(usuario.getEmail(), usuario.getSenha())) {
 			usuario = this.dlo.buscarPorEmail(usuario.getEmail());
 			this.session.setAttribute("user", usuario);
 			this.session.removeAttribute("mensagem");
 			retorno.setViewName("dashboard/index");
 		} else {
-			this.session.removeAttribute("deslogado");
 			this.session.setAttribute("mensagem", "O usuário e/ou senha estão incorretos!");
 			this.session.setAttribute("userAcesso", usuario);
-			retorno.setViewName("redirect:index");
+			retorno.setViewName("redirect:login");
 		}
 
 		return retorno;
@@ -47,13 +48,12 @@ public class LoginController {
 
 	@RequestMapping({ "/logout" })
 	public ModelAndView logout() {
-		ModelAndView retorno = new ModelAndView("redirect:index");
-
 		this.session.removeAttribute("user");
 		this.session.removeAttribute("mensagem");
 		this.session.removeAttribute("userAcesso");
 		this.session.setAttribute("deslogado", "Usuário desconectado com sucesso!");
 
+		retorno.setViewName("redirect:login");
 		return retorno;
 	}
 }

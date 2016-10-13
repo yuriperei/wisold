@@ -47,9 +47,9 @@
 
 	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/wisold?useUnicode=yes&amp;characterEncoding=UTF-8" />
-		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="url" value="jdbc:mysql://wisold.cu26zpexneiy.us-west-1.rds.amazonaws.com/wisold?useUnicode=yes&amp;characterEncoding=UTF-8" />
+		<property name="username" value="wisold" />
+		<property name="password" value="78320653" />
 	</bean>
 	
 	<tx:annotation-driven />

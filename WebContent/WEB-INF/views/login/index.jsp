@@ -35,9 +35,11 @@
 						class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
-					<!-- /.col -->
-					<div class="col-xs-6">
-						<button type="submit" class="btn btn-primary btn-block btn-flat">Acessar painel</button>
+					<div class="col-md-8 ">
+						<a href="cadastrar" class="text-center">EU NÃO SOU CADASTRADO</a>
+					</div>
+					<div class="col-md-4">
+						<button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
 					</div>
 					<!-- /.col -->
 				</div>

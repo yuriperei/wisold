@@ -21,128 +21,146 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 		<h1>
-			Data Tables <small>advanced tables</small>
+			Manter produto <small>DETALHES DO PRODUTO</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li><a href="#"><i class="fa fa-dashboard"></i> Produtos</a></li>
+			<li class="active">Produto</li>
 		</ol>
 		</section>
 
 		<!-- Main content -->
 		<section class="content">
 		<div class="row">
+			<form class="form-horizontal" action="manterProduto" method="post">
+				<input name="id" type="hidden" value="${produto.id}">
 
-			<div class="col-xs-12">
+				<div class="col-md-12">
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title">Detalhes do Produto</h3>
+						</div>
+						<!-- /.box-header -->
 
-				<!-- Horizontal Form -->
-				<div class="box box-primary">
-					<div class="box-header with-border">
-						<h3 class="box-title">Produto</h3>
-					</div>
-					<!-- /.box-header -->
-					<!-- form start -->
-					<form class="form-horizontal" action="manterProduto" method="post">
 						<div class="box-body">
-							<input name="id" type="hidden" value="${produto.id}">
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Indústria</label>
-								<div class="col-sm-10">
-									<select class="form-control select2"
-										data-placeholder="Selecione a indústria" name="idIndustria"
-										id="idIndustria">
-										<c:forEach items="${industrias}" var="industria">
-											<option value="${industria.id}" ${industria.id == produto.industria.id ? "selected" : "" }>${industria.nomeFantasia}</option>
-										</c:forEach>
-									
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Código</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control" id="codigoProduto"
-										name="codigoProduto" placeholder="Código do produto" value="${produto.codigoProduto}">
-								</div>
-								<label for="inputEmail3" class="col-sm-1 control-label">Nome</label>
-								<div class="col-sm-6">
-									<input type="text" class="form-control" id="nome" name="nome"
-										placeholder="Nome" value="${produto.nome}">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Embalagem</label>
-								<div class="col-sm-3">
-									<input type="number" class="form-control" id="embalagem"
-										name="embalagem"
-										placeholder="Quantidade de produto por embalagem: 1, 5, 10 etc."
-										value="${produto.embalagem}">
-								</div>
 
-								<label for="inputEmail3" class="col-sm-1 control-label">Unidade
-									Medida</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control" id="unidadeMedida"
-										name="unidadeMedida" placeholder="Exemplo: KG, CX, PCT, FARDO etc."
-										value="${produto.unidadeMedida}">
-								</div>
+							<div class="col-md-8">
 
-								<label for="inputEmail3" class="col-sm-1 control-label">Preço</label>
-								<div class="col-sm-1">
-									<input type="number" class="form-control" id="preco"
-										name="preco" placeholder="R$" value="${produto.preco}">
-								</div>
-
-								<label for="inputEmail3" class="col-sm-1 control-label">Peso
-									bruto (Kg)</label>
-								<div class="col-sm-1">
-									<input type="number" class="form-control" id="pesoBruto"
-										name="pesoBruto" placeholder="Peso em Kg"
-										value="${produto.pesoBruto}">
-								</div>
-
-							</div>
-							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Observação</label>
-								<div class="col-sm-10">
-									<textarea class="form-control" rows="2" placeholder="Entre com sua observação ..."
-										name="observacao" id="observacao" value="${produto.observacao}"></textarea>
+								<div class="form-group col-md-4">
+									<label>Código do produto</label> <input type="text"
+										class="form-control" id="codigoProduto" name="codigoProduto"
+										placeholder="Informe o código do produto"
+										value="${produto.codigoProduto}" required>
 								</div>
 								<!-- /.form-group -->
 							</div>
+
+							<div class="col-md-8">
+								<div class="form-group col-md-10">
+									<label>Indústria</label> <select class="form-control select2"
+										data-placeholder="Selecione a indústria" name="idIndustria"
+										id="idIndustria">
+										<c:forEach items="${industrias}" var="industria">
+											<option value="${industria.id}"
+												${industria.id == produto.industria.id ? "selected" : "" }>${industria.nomeFantasia}</option>
+										</c:forEach>
+
+									</select>
+								</div>
+								<!-- /.form-group -->
+							</div>
+
+							<div class="col-md-8">
+								<div class="form-group col-md-10">
+									<label>Nome</label> <input type="text" class="form-control"
+										id="nome" name="nome" placeholder="Informe o nome do produto"
+										value="${produto.nome}" required>
+								</div>
+								<!-- /.form-group -->
+							</div>
+
+							<div class="col-md-8">
+								<div class="form-group col-md-5">
+									<label>Embalagem</label> <input type="number"
+										class="form-control" id="embalagem" name="embalagem"
+										placeholder="Quantidade de produto por embalagem: 1, 5, 10 etc."
+										value="${produto.embalagem}">
+
+								</div>
+								<!-- /.form-group -->
+
+								<div class="col-md-5">
+									<label>Unidade de medida</label> <input type="text"
+										class="form-control" id="unidadeMedida" name="unidadeMedida"
+										placeholder="Exemplo: KG, CX, PCT, FARDO etc."
+										value="${produto.unidadeMedida}">
+
+								</div>
+								<!-- /.form-group -->
+
+							</div>
+
+							<div class="col-md-8">
+								<div class="form-group col-md-4">
+									<label>Preço</label> <input type="number" class="form-control"
+										id="preco" name="preco" placeholder="R$"
+										value="${produto.preco}" step='any' min='0' required>
+								</div>
+								<!-- /.form-group -->
+
+								<div class="col-md-4">
+									<label>Peso bruto (Kg)</label> <input type="number"
+										class="form-control" id="pesoBruto" name="pesoBruto"
+										placeholder="Peso em Kg" value="${produto.pesoBruto}" step='any' min='0'>
+								</div>
+								<!-- /.form-group -->
+
+							</div>
+							<!-- /.col -->
+
+							<div class="col-md-8">
+								<div class="form-group col-md-10">
+									<label>Observação</label> <textarea class="form-control" rows="2"
+								placeholder="Entre com sua observação ..." name="observacao"
+								id="observacao">${produto.observacao}</textarea>
+								</div>
+								<!-- /.form-group -->
+
+							</div>
+							<!-- /.col -->
 
 
 						</div>
 						<!-- /.box-body -->
 
 						<div class="box-footer">
-							<c:choose>
-								<c:when test="${empty industrias}">
-									<div class="callout callout-danger pull-right">
-										<p>É necessário cadastrar ao menos uma indústria.</p>
-									</div>
-								</c:when>
-								<c:when test="${not empty industrias}">
-									<button type="submit" class="btn btn-primary pull-right">Salvar</button>
-								</c:when>
-							</c:choose>
-
+							<button type="submit" class="btn btn-primary pull-right">Salvar</button>
 						</div>
 						<!-- /.box-footer -->
 
-					</form>
+					</div>
+					<!-- /.box -->
 				</div>
-				<!-- /.box -->
+				<!-- /.col -->
+
+				<div class="col-md-12">
+					<c:if test="${not empty mensagem}">
+						<div class="alert alert-danger alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">&times;</button>
+							<p>${mensagem}</p>
+						</div>
+					</c:if>
+				</div>
+				<!-- /.col -->
 
 
-			</div>
-			<!-- /.col -->
-
-
+			</form>
 		</div>
 		<!-- /.row --> </section>
 		<!-- /.content -->
+
+
 	</div>
 	<!-- /.content-wrapper -->
 	<%@ include file="../estrutura/rodape.jspf"%>

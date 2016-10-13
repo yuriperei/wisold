@@ -16,8 +16,17 @@ public class AutorizarInterceptor extends HandlerInterceptorAdapter {
 		if (request.getSession().getAttribute("user") != null) {
 			return true;
 		}
+		
+		if((uri.endsWith("cadastrar")) || uri.endsWith("manterUsuario")){
+			return true;
+		}
+		
 		try {
-			response.sendRedirect("login");
+			if(!uri.endsWith("cadastrar") || !uri.endsWith("manterUsuario")){
+				response.sendRedirect("login");
+			}else{
+				response.sendRedirect("cadastrar");
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

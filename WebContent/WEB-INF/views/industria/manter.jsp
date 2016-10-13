@@ -77,7 +77,7 @@
 
 							<div class="col-md-8">
 								<div class="form-group col-md-12">
-									<label>E-mail</label> <input type="text" class="form-control" id="email" name="email"
+									<label>E-mail</label> <input type="email" class="form-control" id="email" name="email"
 										placeholder="Informe o e-mail" value="${industria.email}" required>
 								</div>
 								<!-- /.form-group -->

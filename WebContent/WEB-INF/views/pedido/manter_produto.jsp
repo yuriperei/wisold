@@ -36,6 +36,14 @@
 		<div class="row">
 			<div class="col-xs-12">
 
+				<c:if test="${not empty mensagem}">
+					<div class="alert alert-success alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-hidden="true">&times;</button>
+						<p>${mensagem}</p>
+					</div>
+				</c:if>
+
 				<div class="box box-primary">
 
 					<!-- /.box-header -->
@@ -110,7 +118,8 @@
 																	<div class="col-sm-3">
 																		<input type="number" required class="form-control"
 																			id="quantidade${produto.id}" name="quantidade_"
-																			onkeydown="calcularTotal(${produto.id})" onblur="calcularTotal(${produto.id})" min='1'>
+																			onkeydown="calcularTotal(${produto.id})"
+																			onblur="calcularTotal(${produto.id})" min='1'>
 																	</div>
 																	<p class="help-block col-sm-7">Informe a quantidade
 																		do itens.</p>
@@ -122,7 +131,8 @@
 																		<input type="number" required class="form-control"
 																			id="valor${produto.id}" name="valor_"
 																			value="${produto.preco}"
-																			onkeydown="calcularTotal(${produto.id})" onblur="calcularTotal(${produto.id})" step='any'
+																			onkeydown="calcularTotal(${produto.id})"
+																			onblur="calcularTotal(${produto.id})" step='any'
 																			min='0'>
 																	</div>
 																</div>
@@ -131,7 +141,8 @@
 																	<label for="inputEmail3" class="col-sm-2 control-label">Total</label>
 																	<div class="col-sm-3">
 																		<input type="number" class="form-control"
-																			id="total${produto.id}" name="total_" readonly="true">
+																			id="total${produto.id}" name="total_" readonly="true" step='any'
+																			min='0'>
 																	</div>
 																	<p class="help-block col-sm-7"></p>
 																</div>

@@ -21,12 +21,10 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 		<h1>
-			Data Tables <small>advanced tables</small>
+			Produtos <small>LISTA DE PRODUTOS</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li class="active"><a href="#"><i class="fa fa-dashboard"></i> Produtos</a></li>
 		</ol>
 		</section>
 
@@ -45,9 +43,6 @@
 
 				<div class="box box-primary">
 					<div class="box-header">
-						<h3 class="box-title">Data Table With Full Features</h3>
-					</div>
-					<!-- /.box-header -->
 					<div class="box-body">
 						<table id="tabela" class="table table-bordered table-striped">
 							<thead>
@@ -72,7 +67,7 @@
 										<td>${produto.observacao}</td>
 										<td><a class="btn .btn-xs"
 											href="alterarProduto?id=${produto.id}"> <i
-												class="fa fa-edit"></i> Editar
+												class="fa fa-edit"></i> Visualizar
 										</a> <a class="btn .btn-xs" href="excluirProduto?id=${produto.id}">
 												<i class="fa  fa-trash"></i> Excluir
 										</a></td>
