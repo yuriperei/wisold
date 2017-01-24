@@ -11,7 +11,7 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
 <!-- Bootstrap 3.3.6 -->
-<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />">
 <!-- Font Awesome -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -19,9 +19,9 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="resources/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/dist/css/AdminLTE.min.css" />">
 <!-- iCheck -->
-<link rel="stylesheet" href="resources/plugins/iCheck/square/blue.css">
+<link rel="stylesheet" href="<c:url value="/resources/plugins/iCheck/square/blue.css" />">
 </head>
 <body class="hold-transition register-page">
 	<div class="register-box">
@@ -81,19 +81,19 @@
 	<!-- /.register-box -->
 	
 <!-- FastClick -->
-<script src="resources/plugins/fastclick/fastclick.js"></script>
+<script src="<c:url value="/resources/plugins/fastclick/fastclick.js" />"></script>
 <!-- AdminLTE App -->
-<script src="resources/dist/js/app.min.js"></script>
-<script src="resources/dist/js/demo.js"></script>
+<script src="<c:url value="/resources/dist/js/app.min.js" />"></script>
+<script src="<c:url value="/resources/dist/js/demo.js" />"></script>
 
 	<!-- jQuery 2.1.4 -->
-	<script src="resources/plugins/jQuery/jQuery-2.1.4.min.js"
+	<script src="<c:url value="/resources/plugins/jQuery/jQuery-2.1.4.min.js" />"
 		type="text/javascript"></script>
 	<!-- Bootstrap 3.3.2 JS -->
-	<script src="resources/bootstrap/js/bootstrap.min.js"
+	<script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"
 		type="text/javascript"></script>
 	<!-- iCheck -->
-	<script src="resources/plugins/iCheck/icheck.min.js"
+	<script src="<c:url value="/resources/plugins/iCheck/icheck.min.js" />"
 		type="text/javascript"></script>
 	<script>
 		$(function() {

@@ -6,11 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" charset="utf-8">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.4 -->
-<link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet"	type="text/css" />
+<link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />" rel="stylesheet"	type="text/css" />
 <!-- Theme style -->
-<link href="resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/dist/css/AdminLTE.min.css" />" rel="stylesheet" type="text/css" />
 <!-- iCheck -->
-<link href="resources/plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/plugins/iCheck/square/blue.css" />" rel="stylesheet" type="text/css" />
 
 <title>WiSold</title>
 </head>
@@ -26,12 +26,12 @@
 			
 			<form action="sistema" method="post">
 				<div class="form-group has-feedback">
-					<input type="email" class="form-control" placeholder="Email" name="email" required="required" value="${userAcesso.email}" autofocus /> 
+					<input type="email" class="form-control" placeholder="Email" value="admin@wisold.com.br" name="email" required="required" value="${userAcesso.email}" autofocus /> 
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
 					<input type="password" class="form-control" placeholder="Senha"
-						name="senha" required="required" /> <span
+						name="senha" required="required" value="78320653" /> <span
 						class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
@@ -66,13 +66,13 @@
 	<!-- /.login-box -->
 
 	<!-- jQuery 2.1.4 -->
-	<script src="resources/plugins/jQuery/jQuery-2.1.4.min.js"
+	<script src="<c:url value="/resources/plugins/jQuery/jQuery-2.1.4.min.js" />"
 		type="text/javascript"></script>
 	<!-- Bootstrap 3.3.2 JS -->
-	<script src="resources/bootstrap/js/bootstrap.min.js"
+	<script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"
 		type="text/javascript"></script>
 	<!-- iCheck -->
-	<script src="resources/plugins/iCheck/icheck.min.js"
+	<script src="<c:url value="/resources/plugins/iCheck/icheck.min.js" />"
 		type="text/javascript"></script>
 	<script>
 		$(function() {

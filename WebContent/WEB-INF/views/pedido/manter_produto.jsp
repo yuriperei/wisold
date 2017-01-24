@@ -6,9 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Pedidos</title>
 
-<!-- DATA TABLES -->
-<link href="resources/plugins/datatables/dataTables.bootstrap.css"
-	rel="stylesheet" type="text/css" />
 <%@ include file="../estrutura/head.jspf"%>
 </head>
 
@@ -210,29 +207,6 @@
 	<!-- /.content-wrapper -->
 	<%@ include file="../estrutura/rodape.jspf"%>
 
-	<!-- jQuery 2.1.4 -->
-	<script src="resources/plugins/jQuery/jQuery-2.1.4.min.js"
-		type="text/javascript"></script>
-	<!-- Bootstrap 3.3.2 JS -->
-	<script src="resources/bootstrap/js/bootstrap.min.js"
-		type="text/javascript"></script>
-	<!-- DATA TABES SCRIPT -->
-	<script src="resources/plugins/datatables/jquery.dataTables.min.js"
-		type="text/javascript"></script>
-	<script src="resources/plugins/datatables/dataTables.bootstrap.min.js"
-		type="text/javascript"></script>
-	<script src="resources/plugins/datatables/dataTablesTraducao.js"
-		type="text/javascript"></script>
-	<!-- SlimScroll -->
-	<script src="resources/plugins/slimScroll/jquery.slimscroll.min.js"
-		type="text/javascript"></script>
-	<!-- FastClick -->
-	<script src="resources/plugins/fastclick/fastclick.min.js"
-		type="text/javascript"></script>
-	<!-- AdminLTE App -->
-	<script src="resources/dist/js/app.min.js" type="text/javascript"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="resources/dist/js/demo.js" type="text/javascript"></script>
 	<!-- page script -->
 	<script type="text/javascript">
 		$(function() {

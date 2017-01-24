@@ -6,9 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Produto</title>
 
-<!-- DATA TABLES -->
-<link href="resources/plugins/datatables/dataTables.bootstrap.css"
-	rel="stylesheet" type="text/css" />
 <%@ include file="../estrutura/head.jspf"%>
 </head>
 <body
@@ -111,7 +108,8 @@
 								<div class="col-md-4">
 									<label>Peso bruto (Kg)</label> <input type="number"
 										class="form-control" id="pesoBruto" name="pesoBruto"
-										placeholder="Peso em Kg" value="${produto.pesoBruto}" step='any' min='0'>
+										placeholder="Peso em Kg" value="${produto.pesoBruto}"
+										step='any' min='0'>
 								</div>
 								<!-- /.form-group -->
 
@@ -120,9 +118,10 @@
 
 							<div class="col-md-8">
 								<div class="form-group col-md-10">
-									<label>Observação</label> <textarea class="form-control" rows="2"
-								placeholder="Entre com sua observação ..." name="observacao"
-								id="observacao">${produto.observacao}</textarea>
+									<label>Observação</label>
+									<textarea class="form-control" rows="2"
+										placeholder="Entre com sua observação ..." name="observacao"
+										id="observacao">${produto.observacao}</textarea>
 								</div>
 								<!-- /.form-group -->
 
@@ -166,44 +165,24 @@
 	<%@ include file="../estrutura/rodape.jspf"%>
 
 	<!-- Select2 -->
-	<script src="resources/plugins/select2/select2.full.min.js"
+	<script
+		src="<c:url value="/resources/plugins/select2/select2.full.min.js" />"
 		type="text/javascript"></script>
 	<!-- InputMask -->
-	<script src="resources/plugins/input-mask/jquery.inputmask.js"
+	<script
+		src="<c:url value="/resources/plugins/input-mask/jquery.inputmask.js" />"
 		type="text/javascript"></script>
 	<script
-		src="resources/plugins/input-mask/jquery.inputmask.date.extensions.js"
+		src="<c:url value="/resources/plugins/input-mask/jquery.inputmask.date.extensions.js" />"
 		type="text/javascript"></script>
 	<script
-		src="resources/plugins/input-mask/jquery.inputmask.extensions.js"
+		src="<c:url value="/resources/plugins/input-mask/jquery.inputmask.extensions.js" />"
 		type="text/javascript"></script>
 
-	<!-- jQuery 2.1.4 -->
-	<script src="resources/plugins/jQuery/jQuery-2.1.4.min.js"
-		type="text/javascript"></script>
-	<!-- Bootstrap 3.3.2 JS -->
-	<script src="resources/bootstrap/js/bootstrap.min.js"
-		type="text/javascript"></script>
-	<!-- DATA TABES SCRIPT -->
-	<script src="resources/plugins/datatables/jquery.dataTables.min.js"
-		type="text/javascript"></script>
-	<script src="resources/plugins/datatables/dataTables.bootstrap.min.js"
-		type="text/javascript"></script>
-	<script src="resources/plugins/datatables/dataTablesTraducao.js"
-		type="text/javascript"></script>
-	<!-- SlimScroll -->
-	<script src="resources/plugins/slimScroll/jquery.slimscroll.min.js"
-		type="text/javascript"></script>
-	<!-- FastClick -->
-	<script src="resources/plugins/fastclick/fastclick.min.js"
+	<script src="<c:url value="/resources/plugins/iCheck/icheck.min.js" />"
 		type="text/javascript"></script>
 
-	<script src="resources/plugins/iCheck/icheck.min.js"
-		type="text/javascript"></script>
-	<!-- AdminLTE App -->
-	<script src="resources/dist/js/app.min.js" type="text/javascript"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="resources/dist/js/demo.js" type="text/javascript"></script>
+
 	<!-- page script -->
 	<script type="text/javascript">
 		$(function() {

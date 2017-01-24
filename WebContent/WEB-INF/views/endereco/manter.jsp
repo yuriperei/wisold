@@ -6,9 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Endereço</title>
 
-<!-- DATA TABLES -->
-<link href="resources/plugins/datatables/dataTables.bootstrap.css"
-	rel="stylesheet" type="text/css" />
 <%@ include file="../estrutura/head.jspf"%>
 </head>
 <body
