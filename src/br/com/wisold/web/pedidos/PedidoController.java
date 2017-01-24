@@ -7,9 +7,15 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.wisold.clientes.Cliente;
 import br.com.wisold.clientes.ClienteDLO;
@@ -21,9 +27,12 @@ import br.com.wisold.pedidos.PedidoDLO;
 import br.com.wisold.produtos.Produto;
 import br.com.wisold.produtos.ProdutoDLO;
 import br.com.wisold.usuarios.Usuario;
+import br.com.wisold.util.json.AjaxResponseBody;
+import br.com.wisold.util.json.Views;
 
 @Controller
 @Transactional
+@RequestMapping(value = "/pedido")
 public class PedidoController {
 	@Autowired
 	private PedidoDLO dlo;
@@ -38,17 +47,35 @@ public class PedidoController {
 	private HttpSession session;
 	private ModelAndView retorno = new ModelAndView();
 
-	@RequestMapping({ "/cadastrarPedido" })
-	public String cadastrar() {
+	@RequestMapping(value = {"/cadastrar"}, method = RequestMethod.GET)
+	public String cadastrarPedidoPage() {
 		this.session.removeAttribute("itensPedido");
-		this.session.setAttribute("industrias", listarIndustrias());
-
 		return "pedido/manter_industria";
 	}
+	
+	@JsonView(Views.Public.class)
+	@RequestMapping(value={"/carregar/industria.json"}, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody AjaxResponseBody<Industria> getIndustrias() {
 
-	@RequestMapping({ "/adicionarIndustria" })
-	public String cadastrar(Long idIndustria) {
-		Industria industria = this.industriaDLO.buscarPorId(idIndustria, getUsuario());
+		AjaxResponseBody<Industria> result = new AjaxResponseBody<Industria>();
+		
+		List<Industria> industrias = listarIndustrias();
+		
+		if (industrias.size() > 0) {
+			result.setCode("200");
+			result.setMsg("");
+			result.setResult(industrias);
+		} else {
+			result.setCode("204");
+			result.setMsg("É necessário ter ao menos uma Indústria cadastrada.");
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping({ "/industria/{id}" })
+	public String cadastrar(@PathVariable Long id) {
+		Industria industria = this.industriaDLO.buscarPorId(id, getUsuario());
 
 		if ((industria != null) && (!industria.getProdutos().isEmpty())) {
 			this.session.setAttribute("produtos", listarProdutos(industria));
@@ -82,7 +109,7 @@ public class PedidoController {
 		return "pedido/manter_produto";
 	}
 
-	@RequestMapping({ "/gerarPedido" })
+	@RequestMapping({ "/gerar" })
 	public ModelAndView gerarPedido() {
 
 		List<Cliente> clientes = clienteDLO.listar(getUsuario());
@@ -94,8 +121,8 @@ public class PedidoController {
 		return this.retorno;
 	}
 	
-	@RequestMapping("/visualizarPedido")
-	public ModelAndView visualizar(Long id){
+	@RequestMapping("/obter/{id}")
+	public ModelAndView obter(@PathVariable Long id){
 		Pedido pedido = this.dlo.buscarPorId(id, getUsuario());
 
 		if (pedido != null) {
@@ -110,13 +137,8 @@ public class PedidoController {
 		return this.retorno;
 	}
 
-	/*@RequestMapping({ "/alterarPedido" })
-	public ModelAndView alterar(Long id) {
-		return this.retorno;
-	}*/
-
-	@RequestMapping({ "/excluirPedido" })
-	public ModelAndView excluir(Long id) {
+	@RequestMapping({ "/excluir/{id}" })
+	public ModelAndView excluir(@PathVariable Long id) {
 		if (this.dlo.excluir(id, getUsuario())) {
 			this.retorno.setViewName("redirect:pedidos");
 			this.retorno.getModelMap().remove("mensagem");
@@ -128,7 +150,7 @@ public class PedidoController {
 		return this.retorno;
 	}
 
-	@RequestMapping({ "/manterPedido" })
+	@RequestMapping({ "/manter"})
 	public ModelAndView manter(Pedido pedido) {
 
 		pedido.setIndustria((Industria) session.getAttribute("industria"));
@@ -139,7 +161,7 @@ public class PedidoController {
 		return this.retorno;
 	}
 
-	@RequestMapping({ "/pedidos" })
+	@RequestMapping({ "/obter" })
 	public ModelAndView listar() {
 		List<Pedido> pedidos = this.dlo.listar(getUsuario());
 

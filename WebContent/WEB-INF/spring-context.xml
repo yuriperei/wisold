@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -16,14 +15,15 @@
 		http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<context:component-scan base-package="br.com.wisold" />
-	<mvc:annotation-driven />
+	<mvc:annotation-driven enable-matrix-variables="true"/>
 	<mvc:default-servlet-handler />
-	
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
 
 	<mvc:interceptors>
 		<bean class="br.com.wisold.interceptor.AutorizarInterceptor" />
 	</mvc:interceptors>
-	
+
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -40,18 +40,27 @@
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
 	</bean>
-	
+
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
-    </bean>
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
 
 	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://wisold.cu26zpexneiy.us-west-1.rds.amazonaws.com/wisold?useUnicode=yes&amp;characterEncoding=UTF-8" />
-		<property name="username" value="wisold" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/wisold?useUnicode=yes&amp;characterEncoding=UTF-8" />
+		<property name="username" value="root" />
 		<property name="password" value="78320653" />
 	</bean>
-	
+
+<!-- 	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource"> -->
+<!-- 		<property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
+<!-- 		<property name="url" -->
+<!-- 			value="jdbc:mysql://wisold.cu26zpexneiy.us-west-1.rds.amazonaws.com/wisold?useUnicode=yes&amp;characterEncoding=UTF-8" /> -->
+<!-- 		<property name="username" value="wisold" /> -->
+<!-- 		<property name="password" value="78320653" /> -->
+<!-- 	</bean> -->
+
 	<tx:annotation-driven />
 
 </beans>
