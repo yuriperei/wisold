@@ -3,6 +3,8 @@ package br.com.wisold.industrias;
 import br.com.wisold.enderecos.Endereco;
 import br.com.wisold.produtos.Produto;
 import br.com.wisold.usuarios.Usuario;
+import br.com.wisold.util.json.Views;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,17 +16,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "industrias")
 public class Industria {
 	@Id
 	@GeneratedValue
+	@JsonView(Views.Public.class)
 	private Long id;
+	@JsonView(Views.Public.class)
 	private String nomeFantasia;
+	@JsonView(Views.Public.class)
 	private String razaoSocial;
 	private String cnpj;
 	private String email;
 	private String telefone;
+	@JsonView(Views.Public.class)
 	private Double comissao;
 	@ManyToOne
 	private Usuario usuario;
